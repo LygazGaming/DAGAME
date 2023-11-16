@@ -1,0 +1,44 @@
+﻿@using DAGAME.Common
+@using (Ajax.BeginForm("AddSetting", "SettingSystem", new AjaxOptions
+{
+    OnBegin = "OnBegin",
+    OnSuccess = "OnSuccess",
+    OnFailure = "OnFailure"
+}))
+{
+    <script>
+        function OnBegin() {
+            $('#load_page').html('Đang lưu...');
+        }
+        function OnSuccess(rs) {
+            $('#load_page').html('');
+        }
+        function OnFailure(rs) {
+
+        }
+    </script>
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="activity">
+                            <div class="form-group">
+                                <label>Hotline</label>
+                                <input type="text" value="@SettingHelper.GetValue("SettingHotline")" name="SettingHotline" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div>
+                <button type="submit" class="btn btn-success">Lưu</button>
+            </div>
+        </div>
+    </div>
+
+}
